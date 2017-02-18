@@ -1,0 +1,40 @@
+<%= render 'shared/errors' %>
+
+<form action="<%= @post.id ? post_url(@post.id) : sub_posts_url(@post.sub_id) %>" method="post">
+  <%= auth_token %>
+  <% if @post.id %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="title">Title</label>
+  <input id="title" type="text" name="post[title]" value="<%= @post.title %>">
+
+  <br>
+
+  <label for="url">Url</label>
+  <input id="url" type="text" name="post[url]" value="<%= @post.url %>">
+
+  <br>
+
+  <label for="content">Content</label><br>
+  <textarea id="content" name="post[content]"
+    rows="8" cols="80"><%= @post.content %></textarea>
+
+  <br>
+
+  Crosspost: <br>
+  <% (Sub.all - [@post.sub]).each do |sub| %>
+     <label>
+       <input type="checkbox"
+               value="<%= sub.id %>"
+               name="post[sub_ids][]"
+               <%= "checked" if @post.sub_ids.include?(sub.id) %>>
+       <%= sub.title %>
+     </label><br>
+  <% end %>
+
+ <br>
+ <br>
+
+  <input type="submit" value="<%= @action %>">
+</form>

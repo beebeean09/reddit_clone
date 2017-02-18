@@ -1,0 +1,19 @@
+<h1>Reply</h1>
+
+<form action="<%=  comments_url %>" method="post">
+  <%= auth_token %>
+
+  <input type="hidden" name="comment[post_id]" value="<%= @comment.post_id%>">
+  <input type="hidden" name="comment[comment_id]" value="<%= @comment.id%>"
+
+  <label for="content">Content</label><br>
+  <textarea id="content" name="comment[content]"
+    rows="8" cols="80"></textarea>
+
+ <br>
+
+  <input type="submit" value="Post Comment">
+</form>
+
+<br>
+<%= link_to "Back", @comment.post  %>

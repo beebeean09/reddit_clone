@@ -1,0 +1,13 @@
+
+  <% unless comment.nil? %>
+  <%= link_to "#{comment.content}", comment %>
+    <%= comment.author.username %>
+    <%= comment.created_at %>
+  <% end %>
+  <ul>
+    <% comments[parent].each do |comment| %>
+      <% if comment.comment_id == parent %>
+      <li><%= render 'comment', comment: comment, comments: comments, parent: comment.id %></li>
+        <% end %>
+    <% end %>
+  </ul>

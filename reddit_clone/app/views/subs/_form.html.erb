@@ -1,0 +1,21 @@
+<%= render 'shared/errors' %>
+
+<form action="<%= @sub.id ? sub_url(@sub.id) : subs_url %>" method="post">
+  <%= auth_token %>
+  <% if @sub.id %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="title">Title</label>
+  <input id="title" type="text" name="sub[title]" value="<%= @sub.title %>">
+
+  <br>
+
+  <label for="description">Description</label><br>
+  <textarea id="description" name="sub[description]"
+    rows="8" cols="80"><%= @sub.description %></textarea>
+
+  <br>
+
+  <input type="submit" value="<%= @action %>">
+</form>
